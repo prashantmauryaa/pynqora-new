@@ -1,9 +1,12 @@
 import React from 'react';
 import AnimatedEntry from '../components/AnimatedEntry';
 import SectionHeader from '../components/SectionHeader';
-import { ArrowRight, ArrowUpRight, Github, Code, Cpu } from 'lucide-react';
+import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
+import { ArrowRight, ArrowUpRight, Code, Cpu, Search, Rocket } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { workProjects } from '../data/work';
+import './Work.css';
 
 const Work: React.FC = () => {
   const featured = workProjects.filter(p => p.type === 'featured');
@@ -23,7 +26,7 @@ const Work: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Featured Projects */}
+      {/* 2. Featured Projects — ScrollStack */}
       <section className="section bg-elevated section-border">
         <div className="container">
           <AnimatedEntry direction="up">
@@ -31,26 +34,43 @@ const Work: React.FC = () => {
               <Code size={24} className="text-accent" /> Featured Projects
             </h2>
           </AnimatedEntry>
-          
-          <div className="grid-2" style={{ marginTop: '3rem', gap: '2rem' }}>
-            {featured.map((project, idx) => (
-              <AnimatedEntry direction="up" delay={0.1 * idx} key={project.id}>
-                <div style={{ backgroundColor: 'var(--color-bg)', padding: '2rem', borderRadius: '16px', border: '1px solid var(--color-border)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <span style={{ fontSize: 'var(--text-xs)', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>{project.client}</span>
-                    <h3 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginTop: '0.5rem', fontFamily: 'var(--font-heading)' }}>{project.title}</h3>
+
+          <div style={{ paddingBottom: '6vh', marginTop: '2rem' }}>
+            <ScrollStack>
+              {featured.map((project) => (
+                <ScrollStackItem key={project.id}>
+                  <div className="work-stack-card">
+                    <div className="work-stack-card__info">
+                      {project.client && (
+                        <span className="work-stack-card__client">{project.client}</span>
+                      )}
+                      <h3 className="work-stack-card__title">{project.title}</h3>
+                      <p className="work-stack-card__desc">{project.description}</p>
+                      <div className="work-stack-card__tags">
+                        {project.tags.map(tag => (
+                          <span key={tag} className="work-stack-card__tag">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                    {project.image && (
+                      <div className="work-stack-card__visual">
+                        <div className="work-stack-card__chrome">
+                          <span className="work-stack-card__chrome-dot" />
+                          <span className="work-stack-card__chrome-dot" />
+                          <span className="work-stack-card__chrome-dot" />
+                        </div>
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="work-stack-card__img"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
                   </div>
-                  <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6, flexGrow: 1, marginBottom: '2rem' }}>
-                    {project.description}
-                  </p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                    {project.tags.map(tag => (
-                      <span key={tag} style={{ fontSize: 'var(--text-xs)', padding: '0.25rem 0.75rem', backgroundColor: 'var(--color-surface)', borderRadius: '99px', color: 'var(--color-text)' }}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedEntry>
-            ))}
+                </ScrollStackItem>
+              ))}
+            </ScrollStack>
           </div>
         </div>
       </section>
@@ -90,7 +110,7 @@ const Work: React.FC = () => {
         <div className="container">
           <AnimatedEntry direction="up">
             <h2 className="section-heading" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem' }}>
-              <Github size={24} className="text-accent" /> Open Source
+              <FaGithub size={24} className="text-accent" /> Open Source
             </h2>
           </AnimatedEntry>
 
@@ -115,25 +135,62 @@ const Work: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. Development Approach */}
+      {/* 5. Development Approach — Timeline */}
       <section className="section">
         <div className="container">
           <AnimatedEntry direction="up">
-            <h2 className="section-heading text-center" style={{ marginBottom: '3rem' }}>Our Approach</h2>
+            <SectionHeader
+              label="Process"
+              title="Our Approach"
+              description="A disciplined engineering methodology that eliminates guesswork and delivers predictable, high-quality outcomes."
+            />
           </AnimatedEntry>
-          <div className="grid-3" style={{ gap: '2rem' }}>
-            <AnimatedEntry direction="up" delay={0.1}>
-              <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, marginBottom: '1rem', color: 'var(--color-text)' }}>1. Discovery & Architecture</h3>
-              <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>We don't write a single line of code until the database schema, API contracts, and core architecture are explicitly defined and validated.</p>
-            </AnimatedEntry>
-            <AnimatedEntry direction="up" delay={0.2}>
-              <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, marginBottom: '1rem', color: 'var(--color-text)' }}>2. Iterative Sprints</h3>
-              <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>We build in fast, 2-week sprints. You get continuous access to a staging environment to see progress in real-time, not just on a slide deck.</p>
-            </AnimatedEntry>
-            <AnimatedEntry direction="up" delay={0.3}>
-              <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, marginBottom: '1rem', color: 'var(--color-text)' }}>3. Resilient Deployment</h3>
-              <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>CI/CD pipelines, automated testing, and secure containerization ensure that when we push to production, the system stays up.</p>
-            </AnimatedEntry>
+
+          <div className="work-approach-timeline" style={{ marginTop: '3.5rem' }}>
+            {[
+              {
+                step: '01',
+                icon: <Search size={24} />,
+                title: 'Discovery & Architecture',
+                desc: 'We don\'t write a single line of code until the database schema, API contracts, and core architecture are explicitly defined and validated.',
+                tags: ['System Design', 'Schema Review', 'RFC Drafts'],
+              },
+              {
+                step: '02',
+                icon: <Code size={24} />,
+                title: 'Iterative Sprints',
+                desc: 'We build in fast, 2-week sprints. You get continuous access to a staging environment to see progress in real-time, not just on a slide deck.',
+                tags: ['CI/CD', 'Code Reviews', 'Staging Deploys'],
+              },
+              {
+                step: '03',
+                icon: <Rocket size={24} />,
+                title: 'Resilient Deployment',
+                desc: 'CI/CD pipelines, automated testing, and secure containerization ensure that when we push to production, the system stays up.',
+                tags: ['Zero Downtime', 'Load Testing', 'Monitoring'],
+              },
+            ].map((item, idx) => (
+              <AnimatedEntry direction="up" delay={0.12 * idx} key={item.step}>
+                <div className="work-approach-step">
+                  <div className="work-approach-step__indicator">
+                    <div className="work-approach-step__number">{item.step}</div>
+                    {idx < 2 && <div className="work-approach-step__line" />}
+                  </div>
+                  <div className="work-approach-step__card">
+                    <div className="work-approach-step__icon">
+                      {item.icon}
+                    </div>
+                    <h3 className="work-approach-step__title">{item.title}</h3>
+                    <p className="work-approach-step__desc">{item.desc}</p>
+                    <div className="work-approach-step__tags">
+                      {item.tags.map(tag => (
+                        <span key={tag} className="work-approach-step__tag">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </AnimatedEntry>
+            ))}
           </div>
         </div>
       </section>

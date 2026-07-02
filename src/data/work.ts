@@ -6,6 +6,7 @@ export interface Project {
   tags: string[];
   type: 'featured' | 'concept' | 'open-source';
   link?: string;
+  image?: string;
 }
 
 export const workProjects: Project[] = [
@@ -17,6 +18,7 @@ export const workProjects: Project[] = [
     description: 'A complete overhaul of a legacy logistics system. We built a custom Next.js frontend backed by a highly performant Go microservices architecture, reducing data query latency by 400%.',
     tags: ['Go', 'Next.js', 'PostgreSQL', 'Docker'],
     type: 'featured',
+    image: '/images/proj_microservices.png',
   },
   {
     id: 'f2',
@@ -25,6 +27,7 @@ export const workProjects: Project[] = [
     description: 'Integrated a secure LLM-powered assistant into their internal CRM. The system autonomously handles tier-1 support tickets and triages complex issues based on vector embeddings of their documentation.',
     tags: ['Python', 'OpenAI', 'Pinecone', 'React'],
     type: 'featured',
+    image: '/images/proj_ai.png',
   },
   {
     id: 'f3',
@@ -33,6 +36,7 @@ export const workProjects: Project[] = [
     description: 'A real-time analytics dashboard rendering millions of data points with zero frame drops. Engineered using WebGL and advanced React state management.',
     tags: ['React', 'WebGL', 'WebSockets', 'Node.js'],
     type: 'featured',
+    image: '/images/proj_dashboard.png',
   },
 
   // Concept Projects
