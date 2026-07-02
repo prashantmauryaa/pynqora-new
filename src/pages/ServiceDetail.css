@@ -1,0 +1,113 @@
+/* ============================================================
+   Service Detail Page
+   ============================================================ */
+
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+@media (min-width: 992px) {
+  .service-grid {
+    grid-template-columns: 1.8fr 1fr;
+    gap: var(--space-16);
+  }
+}
+
+.service-content {
+  /* main content area */
+}
+
+.service-sidebar {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+.info-card {
+  padding: var(--space-8);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.feature-card {
+  background: var(--color-bg);
+  padding: var(--space-8);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  height: 100%;
+}
+
+.feature-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-heading);
+}
+
+.feature-desc {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Process Timeline */
+.process-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.process-step {
+  display: flex;
+  gap: var(--space-6);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.process-step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.process-step__num {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+.process-step__content {
+  flex: 1;
+}
+
+.process-step__title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.process-step__desc {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
